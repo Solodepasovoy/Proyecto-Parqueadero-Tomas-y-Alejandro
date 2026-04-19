@@ -2,7 +2,11 @@
 //
 //Antes de iniciar si tienes los archivos de excel dentro de la carpeta borralos
 //Recuerda que apenas acabes, o si quieres probar si funciona o debes correrlo
+<<<<<<< HEAD
 //Para correrlo presiona Windows+R, escribe cmd, luego pon "cd (espacio) (copia la direccion de tu carpeta de parqueadero y pegala)" 
+=======
+//Para correrlo presiona Windows+R, escribe cmd, luego pon "cd (espacio) (copia la direccion de tu carpeta de parqueadero y peguala)" 
+>>>>>>> 40e8b1ad259632256f67357d8b1713d1c192b790
 //Luego pon "g++ main.cpp" y finalmente pon "a.exe". Asi lo corres
 //Si tienes alguna duda o no sabes como integrar las funciones al main, preguntale a CHATGPT o a mi
 //
@@ -210,6 +214,7 @@ char ElegirParq(){
 
 //(1) Crear Placa
 string CrearPlaca(){
+<<<<<<< HEAD
     // Determinar ruta y tamaño según tipo de vehículo
     string ruta;
     int filas, columnas;
@@ -290,6 +295,26 @@ string CrearPlaca(){
 }
 
 bool RegistroDePrecios(string ruta);
+=======
+    if (elegirparq == 'c'){
+        //codigo para crear placa aleatoria de carro ej:ABC123 (asegurate de guardar esa placa nueva que te cree en la variable global "placa")
+
+        //recuerda que debes poner al final que placa = (el numero aletorio que se genero)
+    } else if (elegirparq == 'm'){
+        //codigo para crear placa aleatoria de moto ej:ABC12D (asegurate de guardar esa placa nueva que te cree en la variable global "placa")
+
+        //recuerda que debes poner al final que placa = (el numero aletorio que se genero)
+    } else if (elegirparq == 'b'){
+        //codigo para crear placa aleatoria de bicicleta ej:123456 (asegurate de guardar esa placa nueva que te cree en la variable global "placa")
+
+        //recuerda que debes poner al final que placa = (el numero aletorio que se genero)
+    }
+    return placa;
+}
+
+int RegistroDePrecios();
+
+>>>>>>> 40e8b1ad259632256f67357d8b1713d1c192b790
 bool AddExitVehiculo(string ruta, int filas, int columnas){
         ifstream archivo_in(ruta);
 
@@ -347,8 +372,14 @@ bool AddExitVehiculo(string ruta, int filas, int columnas){
             return false;
         }
        
+<<<<<<< HEAD
        placa = CrearPlaca();
        RegistroDePrecios("RegistroPrecios.txt");
+=======
+        // Antes de lo siguiente debes llamar:
+        // placa = CrearPlaca();
+        // RegistroDePrecios("RegistroPrecios.txt");
+>>>>>>> 40e8b1ad259632256f67357d8b1713d1c192b790
         if (celda == "Parking"){
             arr[f][c] = placa;
         } 
@@ -450,9 +481,18 @@ bool AddExitVehiculo(string ruta, int filas, int columnas){
             
             //(3)Crear la imagen de carros
 
+<<<<<<< HEAD
             ofstream factura("Facturas.txt", ios::app);
           factura << celda << " " << PrecioTotal << " " << propina << "\n";
           factura.close();
+=======
+            //Pon aqui que cree un archivo nuevo con ofstream y que por cada renglon se guarde la placa que salio (espacio) precio total (espacio) propina y luego ponle cout<<endl;
+            //Usa aqui tambien el modo append para que se guarde
+            //Deberia quedar asi:
+            //ABC123 1000 30
+            //ABC12D 800 0
+            //Y asi sucesivamente
+>>>>>>> 40e8b1ad259632256f67357d8b1713d1c192b790
 
             //(6)Eliminar el vehiculo que salió del parqueadero de la lista RegistroDePrecios
             //Ponle aqui en ofstream que edite el archivo RegistroDePrecios y que la placa que se eligio junto con el precio de la derecha, esa linea se borre del archivo
@@ -469,6 +509,7 @@ bool AddExitVehiculo(string ruta, int filas, int columnas){
 
 //(2) RegistroDePrecios
 bool RegistroDePrecios(string ruta){
+<<<<<<< HEAD
     ofstream archivo(ruta, ios::app);
     if (!archivo.is_open()){
         cout<<"No se pudo abrir el registro de precios\n";
@@ -488,6 +529,23 @@ bool RegistroDePrecios(string ruta){
 }
 
 
+=======
+    //Usando ofstream pon que cree y edite el archivo de registro de precios para hacer un registro de placas con su dinero que esten dentro del parqueadero
+    //Pon que guarde cada placa creada y despues en la misma linea pon que si el elegirparq == 'c' o 'm' o 'b', se ponga (espacio) un valor total por cada placa, este
+    //Se debe inicar en 0 y se sume + PrecioCarros, PrecioMotos o PrecioBicis respectivamente, luego pon un cout<<endl; para escribir en la siguiente linea
+    //Usa el modo append en el archivo(Toma la estructura para crear el archivo como lo cree en cada uno de los CrearParqueaderos)
+    //Deberia quedar asi:
+
+    // FORMATO DEL ARCHIVO RegistroPrecios.txt:
+    // ABC123 300
+    // XYZ456 175
+    //
+    // Donde:
+    // izquierda = placa
+    // derecha = precio acumulado
+}
+
+>>>>>>> 40e8b1ad259632256f67357d8b1713d1c192b790
 bool ConsultarPlaca(string ruta, int filas, int columnas){
     ifstream archivo(ruta);
     if (!archivo.is_open()){
@@ -581,12 +639,17 @@ int main(){
     cout<<endl;
 
     // Crear o revisar el archivo de registro de precios
+<<<<<<< HEAD
     ifstream testreg("RegistroPrecios.txt");
 if (!testreg.good()){
     ofstream crear("RegistroPrecios.txt");
     crear.close();
 }
 testreg.close();
+=======
+    // TODO: aquí debe ir la función que cree RegistroPrecios.txt si no existe
+
+>>>>>>> 40e8b1ad259632256f67357d8b1713d1c192b790
 
     do{
         cout<<endl;
