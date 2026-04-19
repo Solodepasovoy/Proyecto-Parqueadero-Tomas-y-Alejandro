@@ -2,22 +2,18 @@
 //
 //Antes de iniciar si tienes los archivos de excel dentro de la carpeta borralos
 //Recuerda que apenas acabes, o si quieres probar si funciona o debes correrlo
-<<<<<<< HEAD
 //Para correrlo presiona Windows+R, escribe cmd, luego pon "cd (espacio) (copia la direccion de tu carpeta de parqueadero y pegala)" 
-=======
-//Para correrlo presiona Windows+R, escribe cmd, luego pon "cd (espacio) (copia la direccion de tu carpeta de parqueadero y peguala)" 
->>>>>>> 40e8b1ad259632256f67357d8b1713d1c192b790
 //Luego pon "g++ main.cpp" y finalmente pon "a.exe". Asi lo corres
 //Si tienes alguna duda o no sabes como integrar las funciones al main, preguntale a CHATGPT o a mi
 //
 //INSTRUCCIONES:
 //
-// 1) CrearPlaca()
-// 2) RegistroDePrecios()
-// 3) Guardar la factura de los carros que salen
-// 4) la parte de cobrar al sacar un vehículo
-// 5) VerImagenDeCarros()
-// 6) Eliminar el vehiculo que salió del parqueadero
+// 1) CrearPlaca()          <- HECHO
+// 2) RegistroDePrecios()   <- HECHO
+// 3) Guardar la factura de los carros que salen  <- HECHO
+// 4) la parte de cobrar al sacar un vehículo     <- HECHO
+// 5) VerImagenDeCarros()   <- PENDIENTE
+// 6) Eliminar el vehiculo que salió del parqueadero <- PENDIENTE
 //
 // FLUJO DEL PROGRAMA:
 //
@@ -41,6 +37,8 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <cstdlib>
+#include <ctime>
 using namespace std;
 
 char opcion;
@@ -63,7 +61,7 @@ char MostrarElMenu(string NombreParq){
     cout<<endl;
     cout <<"m - presione m para ver este menu de nuevo\n";
     cout <<"l - ver lista de parqueaderos y disponibilidad\n";
-    cout <<"v - agregar o sacar un vehículo al parqueadero\n";
+    cout <<"v - agregar o sacar un vehiculo al parqueadero\n";
     cout <<"c - consultar placa/id y en que espacio del parqueadero esta\n";
     cout <<"i - ver una imagen con los vehiculos que han entrado/salido del parqueadero\n";
     cout <<"s - salir\n";
@@ -71,7 +69,6 @@ char MostrarElMenu(string NombreParq){
     cin>>opcion;
     cout<<endl;
     return opcion;
-
 }
 
 bool CrearParqueaderoCarros(string ruta){
@@ -158,7 +155,7 @@ bool CrearParqueaderoBicis(string ruta){
         }
         cout << "El parqueadero de bicicletas ha sido creado con exito.\n";
         return true;
-}
+    }
 }
 
 bool VerLista(string ruta, int filas, int columnas){
@@ -208,14 +205,11 @@ char ElegirParq(){
     cout<<"Presione c para carros, m para motos y b para bicicletas\n";
     cout<<"Opcion: ";
     cin>>elegirparq;
-
     return elegirparq;
 }
 
 //(1) Crear Placa
 string CrearPlaca(){
-<<<<<<< HEAD
-    // Determinar ruta y tamaño según tipo de vehículo
     string ruta;
     int filas, columnas;
     if (elegirparq == 'c'){
@@ -229,7 +223,6 @@ string CrearPlaca(){
         filas = 3; columnas = 15;
     }
 
-    // Leer las placas que ya existen en el parqueadero
     string placasExistentes[500];
     int totalPlacas = 0;
     ifstream archivo(ruta);
@@ -250,7 +243,6 @@ string CrearPlaca(){
         archivo.close();
     }
 
-    // Generar placa nueva que no esté duplicada
     srand(time(0));
     string nuevaPlaca;
     bool duplicada = true;
@@ -259,27 +251,21 @@ string CrearPlaca(){
         nuevaPlaca = "";
 
         if (elegirparq == 'c'){
-            // Formato carro: ABC123
             for (int i = 0; i < 3; i++)
                 nuevaPlaca += (char)('A' + rand() % 26);
             for (int i = 0; i < 3; i++)
                 nuevaPlaca += (char)('0' + rand() % 10);
-
         } else if (elegirparq == 'm'){
-            // Formato moto: ABC12D
             for (int i = 0; i < 3; i++)
                 nuevaPlaca += (char)('A' + rand() % 26);
             for (int i = 0; i < 2; i++)
                 nuevaPlaca += (char)('0' + rand() % 10);
             nuevaPlaca += (char)('A' + rand() % 26);
-
         } else {
-            // Formato bici: 123456
             for (int i = 0; i < 6; i++)
                 nuevaPlaca += (char)('0' + rand() % 10);
         }
 
-        // Revisar si ya existe
         duplicada = false;
         for (int i = 0; i < totalPlacas; i++){
             if (placasExistentes[i] == nuevaPlaca){
@@ -294,35 +280,36 @@ string CrearPlaca(){
     return placa;
 }
 
-bool RegistroDePrecios(string ruta);
-=======
-    if (elegirparq == 'c'){
-        //codigo para crear placa aleatoria de carro ej:ABC123 (asegurate de guardar esa placa nueva que te cree en la variable global "placa")
-
-        //recuerda que debes poner al final que placa = (el numero aletorio que se genero)
-    } else if (elegirparq == 'm'){
-        //codigo para crear placa aleatoria de moto ej:ABC12D (asegurate de guardar esa placa nueva que te cree en la variable global "placa")
-
-        //recuerda que debes poner al final que placa = (el numero aletorio que se genero)
-    } else if (elegirparq == 'b'){
-        //codigo para crear placa aleatoria de bicicleta ej:123456 (asegurate de guardar esa placa nueva que te cree en la variable global "placa")
-
-        //recuerda que debes poner al final que placa = (el numero aletorio que se genero)
+//(2) RegistroDePrecios
+bool RegistroDePrecios(string ruta){
+    ofstream archivo(ruta, ios::app);
+    if (!archivo.is_open()){
+        cout<<"No se pudo abrir el registro de precios\n";
+        return false;
     }
-    return placa;
+
+    if (elegirparq == 'c'){
+        archivo << placa << " " << preciocarros << "\n";
+    } else if (elegirparq == 'm'){
+        archivo << placa << " " << preciomotos << "\n";
+    } else if (elegirparq == 'b'){
+        archivo << placa << " " << preciobici << "\n";
+    }
+
+    archivo.close();
+    return true;
 }
 
-int RegistroDePrecios();
+bool RegistroDePrecios(string ruta);
 
->>>>>>> 40e8b1ad259632256f67357d8b1713d1c192b790
 bool AddExitVehiculo(string ruta, int filas, int columnas){
-        ifstream archivo_in(ruta);
+    ifstream archivo_in(ruta);
 
-        if (!archivo_in.is_open()){
-            cout<<"No se pudo leer "<<ruta<<" regresando al menu";
-            regresarmenu = true;
-            return false;
-        }
+    if (!archivo_in.is_open()){
+        cout<<"No se pudo leer "<<ruta<<" regresando al menu";
+        regresarmenu = true;
+        return false;
+    }
 
     string arr[100][100]; 
         
@@ -372,14 +359,9 @@ bool AddExitVehiculo(string ruta, int filas, int columnas){
             return false;
         }
        
-<<<<<<< HEAD
-       placa = CrearPlaca();
-       RegistroDePrecios("RegistroPrecios.txt");
-=======
-        // Antes de lo siguiente debes llamar:
-        // placa = CrearPlaca();
-        // RegistroDePrecios("RegistroPrecios.txt");
->>>>>>> 40e8b1ad259632256f67357d8b1713d1c192b790
+        placa = CrearPlaca();
+        RegistroDePrecios("RegistroPrecios.txt");
+
         if (celda == "Parking"){
             arr[f][c] = placa;
         } 
@@ -412,9 +394,7 @@ bool AddExitVehiculo(string ruta, int filas, int columnas){
         }
 
         archivo_out.close();
-
         cout << "Vehiculo con placa/id "<<placa<<", ha sido agregado con exito! Regresando al menu\n";
-        
         return true;
         
     } else if (accion == 's') {
@@ -439,13 +419,21 @@ bool AddExitVehiculo(string ruta, int filas, int columnas){
                 regresarmenu = true;
                 return false;
             }
-            else { //4) la parte de cobrar al sacar un vehículo
+            else { //4) Cobrar al sacar un vehículo
+                ifstream regArchivo("RegistroPrecios.txt");
+                string regPlaca;
+                int regPrecio;
+                PrecioTotal = 0;
+                for (int i = 0; i < 1000; i++){
+                    if (!(regArchivo >> regPlaca >> regPrecio)) break;
+                    if (regPlaca == celda){
+                        PrecioTotal = regPrecio;
+                        break;
+                    }
+                }
+                regArchivo.close();
 
-                //Lee la funcion RegistroDePrecios que esta mas abajo
-                //Aqui tienes que llamar a la funcion registro de precios y poner con ifstream que lea el archivo que creaste en RegistroDePrecios.
-                //Que lea linea por linea (Usando solamente for no getline), y si se encuentra la placa elegida, cambiar el valor de preciototal por el valor que esta a la derecha de la placa (Osea el precio)
-
-                cout<<"El precio para sacar su vehiculo del parqueadero es de "<<PrecioTotal<<" COP. Ingrese este precio exacto para sacar su vehículo o agregue mas dinero si quiere darnos propina. (El precio total se actualiza cada minuto, apurese.)\n";
+                cout<<"El precio para sacar su vehiculo del parqueadero es de "<<PrecioTotal<<" COP. Ingrese este precio exacto para sacar su vehiculo o agregue mas dinero si quiere darnos propina.\n";
                 cin>>precio;
                 propina = precio - PrecioTotal;
                 if (precio < PrecioTotal){
@@ -474,29 +462,35 @@ bool AddExitVehiculo(string ruta, int filas, int columnas){
                 }
                 archivo_out << "\n";
             }
-
             archivo_out.close();
 
             cout <<"El vehiculo con placa/id: "<<celda<<", ha salido del parqueadero exitosamente, regresando al menu\n";
             
-            //(3)Crear la imagen de carros
-
-<<<<<<< HEAD
+            //(3) Guardar factura
             ofstream factura("Facturas.txt", ios::app);
-          factura << celda << " " << PrecioTotal << " " << propina << "\n";
-          factura.close();
-=======
-            //Pon aqui que cree un archivo nuevo con ofstream y que por cada renglon se guarde la placa que salio (espacio) precio total (espacio) propina y luego ponle cout<<endl;
-            //Usa aqui tambien el modo append para que se guarde
-            //Deberia quedar asi:
-            //ABC123 1000 30
-            //ABC12D 800 0
-            //Y asi sucesivamente
->>>>>>> 40e8b1ad259632256f67357d8b1713d1c192b790
+            factura << celda << " " << PrecioTotal << " " << propina << "\n";
+            factura.close();
 
-            //(6)Eliminar el vehiculo que salió del parqueadero de la lista RegistroDePrecios
-            //Ponle aqui en ofstream que edite el archivo RegistroDePrecios y que la placa que se eligio junto con el precio de la derecha, esa linea se borre del archivo
-            //Asegurate de que el archivo se guarde con todos los cambios de las placas anteriores que han sido borradas
+            //(6) Eliminar el vehiculo que salio del parqueadero de la lista RegistroDePrecios
+           string lineasRegistro[1000];
+         int totalLineas = 0;
+         ifstream leerRegistro("RegistroPrecios.txt");
+         string rPlaca;
+         int rPrecio;
+     for (int i = 0; i < 1000; i++){
+        if (!(leerRegistro >> rPlaca >> rPrecio)) break;
+     if (rPlaca != celda){
+        lineasRegistro[totalLineas] = rPlaca + " " + to_string(rPrecio);
+        totalLineas++;
+    }
+}
+leerRegistro.close();
+
+ofstream escribirRegistro("RegistroPrecios.txt");
+for (int i = 0; i < totalLineas; i++){
+    escribirRegistro << lineasRegistro[i] << "\n";
+}
+escribirRegistro.close();
 
             return true;
         }
@@ -507,45 +501,6 @@ bool AddExitVehiculo(string ruta, int filas, int columnas){
     }
 }
 
-//(2) RegistroDePrecios
-bool RegistroDePrecios(string ruta){
-<<<<<<< HEAD
-    ofstream archivo(ruta, ios::app);
-    if (!archivo.is_open()){
-        cout<<"No se pudo abrir el registro de precios\n";
-        return false;
-    }
-
-    if (elegirparq == 'c'){
-        archivo << placa << " " << preciocarros << "\n";
-    } else if (elegirparq == 'm'){
-        archivo << placa << " " << preciomotos << "\n";
-    } else if (elegirparq == 'b'){
-        archivo << placa << " " << preciobici << "\n";
-    }
-
-    archivo.close();
-    return true;
-}
-
-
-=======
-    //Usando ofstream pon que cree y edite el archivo de registro de precios para hacer un registro de placas con su dinero que esten dentro del parqueadero
-    //Pon que guarde cada placa creada y despues en la misma linea pon que si el elegirparq == 'c' o 'm' o 'b', se ponga (espacio) un valor total por cada placa, este
-    //Se debe inicar en 0 y se sume + PrecioCarros, PrecioMotos o PrecioBicis respectivamente, luego pon un cout<<endl; para escribir en la siguiente linea
-    //Usa el modo append en el archivo(Toma la estructura para crear el archivo como lo cree en cada uno de los CrearParqueaderos)
-    //Deberia quedar asi:
-
-    // FORMATO DEL ARCHIVO RegistroPrecios.txt:
-    // ABC123 300
-    // XYZ456 175
-    //
-    // Donde:
-    // izquierda = placa
-    // derecha = precio acumulado
-}
-
->>>>>>> 40e8b1ad259632256f67357d8b1713d1c192b790
 bool ConsultarPlaca(string ruta, int filas, int columnas){
     ifstream archivo(ruta);
     if (!archivo.is_open()){
@@ -581,42 +536,13 @@ bool ConsultarPlaca(string ruta, int filas, int columnas){
     regresarmenu = true;
     return false;
 }
-//5) VerImagenDeCarros()
+
+//5) VerImagenDeCarros() - Pendiente
 bool VerImagenDeCarros(){
-    //En esta variable debes leer el archivo de los vehiculos que saliero y luego en cout debe hacer un dibujito del vehiculo y abajo poner la placa del vehiculo que salio, el precio total y la propina (los valores del documento)
-    //Asegurate que el sistema sepa si esa placa es un carro, moto o bici y hacer su dibujito, te deberia salir en consola algo como esto:
-    //Debe quedarte algo asi:
-
-    // ==================== CARRO ====================
-    //        ______
-    //       /|_||_\`.__
-    //      (   _    _ _\
-    //      =`-(_)--(_)-'
-    // 
-    // Placa: ABC123, Valor Total: 1000, Propina: 200
-
-
-    // ==================== MOTO ====================
-    //        __(o)
-    //      _ \<_
-    //     (_)/(_)
-    // 
-    // Placa: ABC12D, Valor Total: 800, Propina: 100
-
-
-    // ==================== BICICLETA ====================
-    //      __o
-    //    _ \<_
-    //   (_)/(_)
-    // 
-    // Placa: 123456, Valor Total: 300, Propina: 50
-
-
-return true;
+    return true;
 }
 
 int main(){
-    // Crear archivos solo si no existen
     ifstream testc("ParkingCarros.txt");
     if (!testc.good()){
         CrearParqueaderoCarros("ParkingCarros.txt");
@@ -638,18 +564,12 @@ int main(){
     testb.close();
     cout<<endl;
 
-    // Crear o revisar el archivo de registro de precios
-<<<<<<< HEAD
     ifstream testreg("RegistroPrecios.txt");
-if (!testreg.good()){
-    ofstream crear("RegistroPrecios.txt");
-    crear.close();
-}
-testreg.close();
-=======
-    // TODO: aquí debe ir la función que cree RegistroPrecios.txt si no existe
-
->>>>>>> 40e8b1ad259632256f67357d8b1713d1c192b790
+    if (!testreg.good()){
+        ofstream crear("RegistroPrecios.txt");
+        crear.close();
+    }
+    testreg.close();
 
     do{
         cout<<endl;
@@ -689,7 +609,7 @@ testreg.close();
             regresarmenu = true;
         } else if (opcion == 'c'){
             regresarmenu = false;
-             ElegirParq();
+            ElegirParq();
             if (elegirparq == 'c'){
                 ConsultarPlaca("ParkingCarros.txt", 16, 18);
             } else if (elegirparq == 'm'){
