@@ -69,7 +69,7 @@ Se creó la función ObtenerHora() que lee la hora local del computador usando l
 
 ---
 
-#### 5. Registro de hora de salida
+#### 5. Registro de hora de salida (Nos ayudó la IA)
 
 **¿Para qué se implementó?**
 Se implementó para mostrar y registrar la hora exacta en que cada vehículo abandona el parqueadero.
@@ -108,7 +108,7 @@ Al momento de sacar el vehículo, el sistema calcula la diferencia entre el valo
 
 ---
 
-#### 8. Sistema de actualización automática de precios por tiempo
+#### 8. Sistema de actualización automática de precios por tiempo (Nos ayudó la IA)
 
 **¿Para qué se implementó?**
 Se implementó para que el costo del parqueadero aumente automáticamente con el paso del tiempo sin intervención del usuario.
